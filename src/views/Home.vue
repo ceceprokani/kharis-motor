@@ -12,18 +12,18 @@
                 </div>
                 <!-- statistic employee -->
                 <div class="row">
-                    <div class="col-md-3 col-sm-6" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1">
+                    <div class="col-md-4 col-sm-6" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1">
                         <div class="card custom-rounded-medium">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="avatar-md">
                                         <span class="avatar-title rounded-circle bg-primary h1">
-                                            <i class="mdi mdi-account-group-outline text-white"></i>
+                                            <i class="ri-gift-2-line text-white"></i>
                                         </span>
                                     </div>
                                     <div class="d-block ms-3">
-                                        <p class="mb-1 text-dark">Total Brand</p>
-                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-primary">{{statistic.total_candidate | 0}}</h1> <span class="font-size-12 mb-1">orang</span></div>
+                                        <p class="mb-1 text-dark">Total Merk Barang</p>
+                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-primary">{{statistic.total_candidate | 0}}</h1> <span class="font-size-12 mb-1">data</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -31,18 +31,18 @@
                         </div>
                         <!-- end card -->
                     </div>
-                    <div class="col-md-3 col-sm-6" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1">
+                    <div class="col-md-4 col-sm-6" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1">
                         <div class="card custom-rounded-medium">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="avatar-md">
-                                        <span class="avatar-title rounded-circle bg-success h1">
-                                            <i class="mdi mdi-clipboard-check-multiple-outline text-white"></i>
+                                        <span class="avatar-title rounded-circle bg-info h1">
+                                            <i class="ri-stack-overflow-line text-white"></i>
                                         </span>
                                     </div>
                                     <div class="d-block ms-3">
-                                        <p class="mb-1 text-dark">Lolos</p>
-                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-success">{{statistic.total_candidate_passed | 0}}</h1> <span class="font-size-12 mb-1">orang</span></div>
+                                        <p class="mb-1 text-dark">Total Kategori Barang</p>
+                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-info">{{statistic.total_candidate_passed | 0}}</h1> <span class="font-size-12 mb-1">data</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -50,17 +50,17 @@
                         </div>
                         <!-- end card -->
                     </div>
-                    <div class="col-md-3 col-sm-6" v-if="['superadmin', 'admin', 'koordinator', 'manajer', 'client'].indexOf($store.state.user?.role?.toLowerCase()) != -1">
+                    <div class="col-md-4 col-sm-6" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1">
                         <div class="card custom-rounded-medium">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="avatar-md">
                                         <span class="avatar-title rounded-circle bg-warning h1">
-                                            <i class="mdi mdi-clipboard-text-off-outline text-white"></i>
+                                            <i class="ri-dropbox-line text-white"></i>
                                         </span>
                                     </div>
                                     <div class="d-block ms-3">
-                                        <p class="mb-1 text-dark">Tidak Lolos</p>
+                                        <p class="mb-1 text-dark">Total Barang</p>
                                         <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-warning">{{statistic.total_candidate_failed | 0}}</h1> <span class="font-size-12 mb-1">orang</span></div>
                                     </div>
                                 </div>
@@ -69,18 +69,37 @@
                         </div>
                         <!-- end card -->
                     </div>
-                    <div class="col-md-3 col-sm-6" v-if="['superadmin', 'admin', 'koordinator', 'manajer', 'client'].indexOf($store.state.user?.role?.toLowerCase()) != -1">
+                    <div class="col-md-6 col-sm-12" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1">
                         <div class="card custom-rounded-medium">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="avatar-md">
-                                        <span class="avatar-title rounded-circle bg-dark h1">
-                                            <i class="mdi mdi-account-multiple-outline text-white"></i>
+                                        <span class="avatar-title rounded-circle bg-success h1">
+                                            <i class="ri-coins-fill text-white"></i>
                                         </span>
                                     </div>
                                     <div class="d-block ms-3">
-                                        <p class="mb-1 text-dark">Total Admin</p>
-                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-dark">{{statistic.total_admin | 0}}</h1> <span class="font-size-12 mb-1">orang</span></div>
+                                        <p class="mb-1 text-dark">Jumlah Pemasukan Bulan Juni 2025</p>
+                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-success">{{statistic.total_admin | 0}}</h1> <span class="font-size-12 mb-1">rupiah</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card-body -->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <div class="col-md-6 col-sm-12" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1">
+                        <div class="card custom-rounded-medium">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="avatar-md">
+                                        <span class="avatar-title rounded-circle bg-danger h1">
+                                            <i class="ri-exchange-dollar-fill text-white"></i>
+                                        </span>
+                                    </div>
+                                    <div class="d-block ms-3">
+                                        <p class="mb-1 text-dark">Jumlah Pengeluaran Bulan Juni 2025</p>
+                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-danger">{{statistic.total_admin | 0}}</h1> <span class="font-size-12 mb-1">rupiah</span></div>
                                     </div>
                                 </div>
                             </div>
