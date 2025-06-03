@@ -7,9 +7,12 @@ import { ApiCore } from '../services/core'
 import Home from '../views/Home.vue'
 import Signin from '../views/authentication/Signin.vue'
 
-// Master Data
+// Master Data Brand
 import BrandList from '../views/master-data/brand/List.vue'
 import BrandForm from '../views/master-data/brand/Form.vue'
+// Master Data Category
+import CategoryList from '../views/master-data/category/List.vue'
+import CategoryForm from '../views/master-data/category/Form.vue'
 
 // Employees
 import ManageUserList from '../views/manage-users/List.vue'
@@ -91,6 +94,26 @@ const routes = [
         component: BrandForm,
         meta: {
             title: `${nameApplication} | Form Merk Barang`,
+            footer: true,
+            navbar: true,
+        }
+    },
+    {
+        path: '/category',
+        name: 'category',
+        component: CategoryList,
+        meta: {
+            title: `${nameApplication} | Data Kategori Barang`,
+            footer: true,
+            navbar: true,
+        }
+    },
+    {
+        path: '/category/form/:id?',
+        name: 'category.add',
+        component: CategoryForm,
+        meta: {
+            title: `${nameApplication} | Form Kategori Barang`,
             footer: true,
             navbar: true,
         }

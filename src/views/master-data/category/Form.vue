@@ -8,7 +8,7 @@
                         <div class="row">
                             <div class="col-12 mt-3">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">Form Merk Barang</h4>
+                                    <h4 class="mb-sm-0">Form Kategori Barang</h4>
                                 </div>
                             </div>
                         </div>
@@ -21,13 +21,13 @@
                                             <div class="spacer-medium"></div>
                                             <div class="form-group mb-3">
                                                 <label class="form-label">Nama <span class="text-danger">*</span></label>
-                                                <Field type="text" name="name" class="form-control custom-rounded-medium mb-2" placeholder="Masukkan nama merk barang" v-model="form.name"/>
+                                                <Field type="text" name="name" class="form-control custom-rounded-medium mb-2" placeholder="Masukkan nama kategori barang" v-model="form.name"/>
                                                 <ErrorMessage name="name" :class="'text-danger'" />
                                             </div>
                                         </div>
                                         <div class="card-footer card-footer-custom-radius-medium">
                                             <div class="d-flex justify-content-end">
-                                                <router-link to="/brand" class="btn border-light bg-white custom-rounded-medium me-2">Kembali</router-link>
+                                                <router-link to="/category" class="btn border-light bg-white custom-rounded-medium me-2">Kembali</router-link>
                                                 <button type="submit" @click="validateBeforeSubmit" class="btn btn-primary custom-rounded-medium">Simpan</button>
                                             </div>
                                         </div>
@@ -49,7 +49,7 @@ import { ApiCore } from '@/services/core';
 import apiEndPoint from '@/services/api-endpoint';
 
 export default {
-    name: 'BrandForm',
+    name: 'CategoryForm',
     data() {
         return {
             id: this.$route.params.id,
@@ -65,7 +65,7 @@ export default {
     computed: {
         schema() {
             return yup.object({
-                name: yup.string().required('Masukkan nama merk barang'),
+                name: yup.string().required('Masukkan nama kategori barang'),
             });
         }
     },
