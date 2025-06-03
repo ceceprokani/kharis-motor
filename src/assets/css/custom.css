@@ -151,6 +151,7 @@
 
 .sub-menu .active > span {
     font-weight: bold !important;
+    color: var(--bs-yellow) !important;
 }
 
 body[data-sidebar=dark].vertical-collpsed .vertical-menu #sidebar-menu>ul>li {
