@@ -7,11 +7,13 @@ import { ApiCore } from '../services/core'
 import Home from '../views/Home.vue'
 import Signin from '../views/authentication/Signin.vue'
 
+// Master Data
+import BrandList from '../views/master-data/brand/List.vue'
+import BrandForm from '../views/master-data/brand/Form.vue'
+
 // Employees
 import ManageUserList from '../views/manage-users/List.vue'
 import ManageUserForm from '../views/manage-users/Form.vue'
-// Report
-import Report from '../views/report/Index.vue'
 
 import ChangePassword from '../views/ChangePassword.vue'
 
@@ -69,6 +71,26 @@ const routes = [
         component: ManageUserForm,
         meta: {
             title: `${nameApplication} | Form Pengguna`,
+            footer: true,
+            navbar: true,
+        }
+    },
+    {
+        path: '/brand',
+        name: 'brand',
+        component: BrandList,
+        meta: {
+            title: `${nameApplication} | Data Merk Barang`,
+            footer: true,
+            navbar: true,
+        }
+    },
+    {
+        path: '/brand/form/:id?',
+        name: 'brand.add',
+        component: BrandForm,
+        meta: {
+            title: `${nameApplication} | Form Merk Barang`,
             footer: true,
             navbar: true,
         }
