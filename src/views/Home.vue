@@ -153,7 +153,7 @@
                                                 <td class="middle-item text-nowrap" style="width: 18%">
                                                     <div class="d-flex align-items-center px-3 py-2 bg-light border custom-rounded-medium mb-1 fw-bold">
                                                         <i class="mdi mdi-calendar-month me-2"></i>
-                                                        {{ $changeFormatDate(item.date, 'DD MMMM YYYY') }}
+                                                        {{ $changeFormatDate(item.date) }}
                                                     </div>
                                                 </td>
                                             </tr>
@@ -189,16 +189,16 @@ export default {
             fetching: false,
             statistic: {
                 last_item: [
-                    { id: 1, name: 'Oli Mesin', purchase_price: 50000, selling_price: 65000, quantity: 20, date: '2024-06-01', brand: 'Pertamina', category: 'Pelumas' },
-                    { id: 2, name: 'Kampas Rem', purchase_price: 30000, selling_price: 45000, quantity: 15, date: '2024-06-02', brand: 'Aspira', category: 'Rem' },
-                    { id: 3, name: 'Busi', purchase_price: 15000, selling_price: 25000, quantity: 50, date: '2024-06-03', brand: 'NGK', category: 'Kelistrikan' },
-                    { id: 4, name: 'Aki', purchase_price: 250000, selling_price: 300000, quantity: 8, date: '2024-06-04', brand: 'GS Astra', category: 'Kelistrikan' },
-                    { id: 5, name: 'Filter Udara', purchase_price: 20000, selling_price: 35000, quantity: 18, date: '2024-06-05', brand: 'Honda', category: 'Filter' },
-                    { id: 6, name: 'Lampu Depan', purchase_price: 40000, selling_price: 60000, quantity: 12, date: '2024-06-06', brand: 'Philips', category: 'Kelistrikan' },
-                    { id: 7, name: 'Ban Luar', purchase_price: 150000, selling_price: 200000, quantity: 10, date: '2024-06-07', brand: 'IRC', category: 'Ban' },
-                    { id: 8, name: 'Ban Dalam', purchase_price: 35000, selling_price: 50000, quantity: 25, date: '2024-06-08', brand: 'FDR', category: 'Ban' },
-                    { id: 9, name: 'Rantai', purchase_price: 60000, selling_price: 80000, quantity: 14, date: '2024-06-09', brand: 'SSS', category: 'Penggerak' },
-                    { id: 10, name: 'Spion', purchase_price: 25000, selling_price: 40000, quantity: 30, date: '2024-06-10', brand: 'Yamaha', category: 'Aksesoris' }
+                    { id: 1, name: 'Oli Mesin', purchase_price: 50000, selling_price: 65000, quantity: 20, date: '2024-06-01 08:15:23', brand: 'Pertamina', category: 'Pelumas' },
+                    { id: 2, name: 'Kampas Rem', purchase_price: 30000, selling_price: 45000, quantity: 15, date: '2024-06-02 09:30:45', brand: 'Aspira', category: 'Rem' },
+                    { id: 3, name: 'Busi', purchase_price: 15000, selling_price: 25000, quantity: 50, date: '2024-06-03 10:05:12', brand: 'NGK', category: 'Kelistrikan' },
+                    { id: 4, name: 'Aki', purchase_price: 250000, selling_price: 300000, quantity: 8, date: '2024-06-04 11:20:33', brand: 'GS Astra', category: 'Kelistrikan' },
+                    { id: 5, name: 'Filter Udara', purchase_price: 20000, selling_price: 35000, quantity: 18, date: '2024-06-05 12:45:55', brand: 'Honda', category: 'Filter' },
+                    { id: 6, name: 'Lampu Depan', purchase_price: 40000, selling_price: 60000, quantity: 12, date: '2024-06-06 13:10:07', brand: 'Philips', category: 'Kelistrikan' },
+                    { id: 7, name: 'Ban Luar', purchase_price: 150000, selling_price: 200000, quantity: 10, date: '2024-06-07 14:25:19', brand: 'IRC', category: 'Ban' },
+                    { id: 8, name: 'Ban Dalam', purchase_price: 35000, selling_price: 50000, quantity: 25, date: '2024-06-08 15:40:41', brand: 'FDR', category: 'Ban' },
+                    { id: 9, name: 'Rantai', purchase_price: 60000, selling_price: 80000, quantity: 14, date: '2024-06-09 16:55:02', brand: 'SSS', category: 'Penggerak' },
+                    { id: 10, name: 'Spion', purchase_price: 25000, selling_price: 40000, quantity: 30, date: '2024-06-10 17:15:29', brand: 'Yamaha', category: 'Aksesoris' }
                 ]
             },
         }

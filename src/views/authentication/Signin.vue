@@ -11,7 +11,7 @@
                                     <div class="p-4">
                                         <div class="text-start mb-3">
                                             <router-link to="/signin" class="">
-                                                <img src="@/assets/images/logo/logo-horizontal.png" alt="" height="80" class="img-fluid mx-auto">
+                                                <img src="@/assets/images/logo/logo.png" alt="" height="80" class="img-fluid mx-auto">
                                             </router-link>
                                         </div>
                                         <!-- end row -->

@@ -8,15 +8,12 @@ import Home from '../views/Home.vue'
 import Signin from '../views/authentication/Signin.vue'
 
 // Master Data Brand
-import BrandList from '../views/master-data/brand/List.vue'
-import BrandForm from '../views/master-data/brand/Form.vue'
+import Brand from '../views/master-data/brand/Index.vue'
 // Master Data Category
-import CategoryList from '../views/master-data/category/List.vue'
-import CategoryForm from '../views/master-data/category/Form.vue'
+import Category from '../views/master-data/category/Index.vue'
 
-// Employees
-import ManageUserList from '../views/manage-users/List.vue'
-import ManageUserForm from '../views/manage-users/Form.vue'
+// Items
+import Items from '../views/items/Index.vue'
 
 import ChangePassword from '../views/ChangePassword.vue'
 
@@ -59,29 +56,9 @@ const routes = [
         }
     },
     {
-        path: '/manage-users',
-        name: 'manage-users',
-        component: ManageUserList,
-        meta: {
-            title: `${nameApplication} | Data Pengguna`,
-            footer: true,
-            navbar: true,
-        }
-    },
-    {
-        path: '/manage-users/form/:id?',
-        name: 'manage-users.add',
-        component: ManageUserForm,
-        meta: {
-            title: `${nameApplication} | Form Pengguna`,
-            footer: true,
-            navbar: true,
-        }
-    },
-    {
         path: '/brand',
         name: 'brand',
-        component: BrandList,
+        component: Brand,
         meta: {
             title: `${nameApplication} | Data Merk Barang`,
             footer: true,
@@ -89,19 +66,9 @@ const routes = [
         }
     },
     {
-        path: '/brand/form/:id?',
-        name: 'brand.add',
-        component: BrandForm,
-        meta: {
-            title: `${nameApplication} | Form Merk Barang`,
-            footer: true,
-            navbar: true,
-        }
-    },
-    {
         path: '/category',
         name: 'category',
-        component: CategoryList,
+        component: Category,
         meta: {
             title: `${nameApplication} | Data Kategori Barang`,
             footer: true,
@@ -109,11 +76,11 @@ const routes = [
         }
     },
     {
-        path: '/category/form/:id?',
-        name: 'category.add',
-        component: CategoryForm,
+        path: '/items',
+        name: 'items',
+        component: Items,
         meta: {
-            title: `${nameApplication} | Form Kategori Barang`,
+            title: `${nameApplication} | Data Barang`,
             footer: true,
             navbar: true,
         }

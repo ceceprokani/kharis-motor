@@ -9,7 +9,7 @@
                             <h4 class="mb-sm-0">Data Kategori Barang</h4>
                             <div class="d-flex">
                                 <button class="btn button-rounded me-2" type="button" :class="{'btn-light': selectedData.length <= 0, 'btn-danger': selectedData.length > 0}" :disabled="selectedData.length <= 0" @click="deletedDataBatch()">Hapus Terpilih</button>
-                                <router-link :to="{name: 'category.add'}" class="btn btn-primary button-rounded">Tambah Baru</router-link>
+                                <button type="button" class="btn btn-primary button-rounded" data-bs-toggle="modal" data-bs-target=".modal-form">Tambah Baru</button>
                             </div>
                         </div>
                     </div>
@@ -39,6 +39,7 @@
                                     <thead>
                                         <tr>
                                             <th width="2%" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1"><input type="checkbox" class="form-check-input" v-model="isCheckAll" @change="checkAll()" /></th>
+                                            <th class="text-center">#</th>
                                             <th>Nama</th>
                                             <th colspan=2><div class="d-flex"><i class="ri-calendar-2-line me-2"></i> Ditambahkan pada</div></th>
                                         </tr>
@@ -47,11 +48,12 @@
                                         <template v-if="pagination.total">
                                             <tr v-for="item, index in list">
                                                 <td class="middle-item" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1"><input type="checkbox" class="form-check-input" v-model="item.checked" /></td>
+                                                <td class="middle-item text-center" style="width: 5%;">{{ (index + 1) + (pagination.page - 1) * pagination.limit }}</td>
                                                 <td class="middle-item"><div class="fw-bold">{{ item.name }}</div></td>
                                                 <td class="middle-item">{{ $changeFormatDate(item.created_at) }}</td>
                                                 <td class="middle-item" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1">
                                                     <div class="d-flex justify-content-end align-items-center">
-                                                        <router-link :to="`category/form/${item.id}`" type="button" class="btn btn-square border bg-primary text-white me-2"><i class="ri-edit-circle-line fs-4"></i></router-link>
+                                                        <button type="button" class="btn btn-square border bg-primary text-white me-2" data-bs-toggle="modal" data-bs-target=".modal-form"><i class="ri-edit-circle-line fs-4"></i></button>
                                                         <button type="button" class="btn btn-square border bg-white me-2" @click="deletedData(item)"><i class="ri-delete-bin-5-line fs-4"></i></button>
                                                     </div>
                                                 </td>
@@ -73,16 +75,44 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade modal-form custom-rounded-medium" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content custom-rounded-medium">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tambah Merk Barang</h5>
+                        <button type="button" class="btn btn-square bg-white border" data-bs-dismiss="modal" ref="closeModal"><i class="ri-close-line fs-4"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <Form :validation-schema="schema" @submit="handleSubmit" ref="form">
+                            <h6 class="mb-3">Silahkan lengkapi form dibawah ini dengan benar.</h6>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Nama <span class="text-danger">*</span></label>
+                                <Field type="text" name="name" class="form-control custom-rounded-medium mb-2" placeholder="Masukkan nama merk barang" v-model="form.name"/>
+                                <ErrorMessage name="name" :class="'text-danger'" />
+                            </div>
+                            <div class="spacer-medium"></div>
+                            <div class="d-flex justify-content-end">
+                                <button tyype="button" data-bs-dismiss="modal" class="btn border-light bg-white custom-rounded-medium me-2">Tutup</button>
+                                <button type="submit" @click="validateBeforeSubmit" class="btn btn-primary custom-rounded-medium">Simpan</button>
+                            </div>
+                        </Form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
 import { ApiCore } from '@/services/core';
 import apiEndPoint from '@/services/api-endpoint';
 
+import { Field, Form, ErrorMessage } from 'vee-validate';
+import * as yup from 'yup';
+
 import {debounce, filter, map} from 'lodash'
 
 export default {
-    name: 'CategoryList',
+    name: 'Category',
     data() {
         return {
             list: [
@@ -106,18 +136,28 @@ export default {
                 limit: 10,
                 total: 10
             },
+            form: {
+                id: '',
+                name: '',
+            },
             params: {
                 keywords: '',
-                location_id: '',
-                department_id: ''
             },
             limit: [10,20,30,50,100],
         }
+    },
+    components: {
+        Field, Form, ErrorMessage
     },
     computed: {
         selectedData() {
             return filter(this.list, function(data) { return data.checked; })
         },
+        schema() {
+            return yup.object({
+                name: yup.string().required('Masukkan nama merk barang'),
+            });
+        }
     },
     mounted() {
         // this.fetchData(1)
