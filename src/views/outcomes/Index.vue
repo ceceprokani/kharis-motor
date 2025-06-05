@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-start justify-content-between">
-                            <h4 class="mb-sm-0">Data Kategori Barang</h4>
+                            <h4 class="mb-sm-0">Data Kewajiban</h4>
                             <div class="d-flex">
                                 <button class="btn button-rounded me-2" type="button" :class="{'btn-light': selectedData.length <= 0, 'btn-danger': selectedData.length > 0}" :disabled="selectedData.length <= 0" @click="deletedDataBatch()">Hapus Terpilih</button>
                                 <button type="button" class="btn btn-primary button-rounded" data-bs-toggle="modal" data-bs-target=".modal-form">Tambah Baru</button>
@@ -18,7 +18,7 @@
                     <div class="w-100">
                         <div class="input-group-left">
                             <i class="mdi mdi-magnify fs-2 input-group-icon"></i>
-                            <input type="text" class="form-control input-group-form" placeholder="Cari data kategori barang disini" v-model="params.keywords" @input="debouncedHandler">
+                            <input type="text" class="form-control input-group-form" placeholder="Cari data item barang disini" v-model="params.keywords" @input="debouncedHandler">
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="d-flex justify-content-between mb-3">
-                            <p>Menampilkan {{pagination.total}} data kategori barang</p>
+                            <p>Menampilkan {{pagination.total}} data</p>
                             <div>
                                 <select class="form-select select-rounded padding-vertical-10" v-model="pagination.limit" @change="fetchData(1)">
                                     <option v-for="item in limit" :value="item">{{item}}</option>
@@ -40,8 +40,11 @@
                                         <tr>
                                             <th width="2%" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1"><input type="checkbox" class="form-check-input" v-model="isCheckAll" @change="checkAll()" /></th>
                                             <th class="text-center">#</th>
-                                            <th>Nama</th>
-                                            <th colspan=2><div class="d-flex"><i class="ri-calendar-2-line me-2"></i> Ditambahkan pada</div></th>
+                                            <th>Item</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th>Nilai</th>
+                                            <th>Kewajiban</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -49,8 +52,10 @@
                                             <tr v-for="item, index in list">
                                                 <td class="middle-item" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1"><input type="checkbox" class="form-check-input" v-model="item.checked" /></td>
                                                 <td class="middle-item text-center" style="width: 5%;">{{ (index + 1) + (pagination.page - 1) * pagination.limit }}</td>
-                                                <td class="middle-item"><div class="fw-bold">{{ item.name }}</div></td>
-                                                <td class="middle-item">{{ $changeFormatDate(item.created_at) }}</td>
+                                                <td class="middle-item w-100"><div class="fw-bold">{{ item.name }}</div></td>
+                                                <td class="middle-item text-center"><div class="fw-bold">{{ item.quantity }}</div></td>
+                                                <td class="middle-item text-nowrap"><div class="fw-bold">Rp. {{ $toCurrency(item.total_amount, 0, 0) || '-' }}</div></td>
+                                                <td class="middle-item text-nowrap"><div class="fw-bold">Rp. {{ $toCurrency(item.amount, 0, 0) || '-' }}</div></td>
                                                 <td class="middle-item" v-if="['superadmin', 'admin'].indexOf($store.state.user?.role?.toLowerCase()) != -1">
                                                     <div class="d-flex justify-content-end align-items-center">
                                                         <button type="button" class="btn btn-square border bg-primary text-white me-2" data-bs-toggle="modal" data-bs-target=".modal-form"><i class="ri-edit-circle-line fs-4"></i></button>
@@ -63,6 +68,12 @@
                                             <td colspan="8" class="text-center text-muted">Data tidak tersedia</td>
                                         </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="5" class="bg-primary text-white custom-rounded-medium-bottom-left">Total Kewajiban (Per Bulan)</th>
+                                            <th colspan="2" class="bg-primary text-white custom-rounded-medium-bottom-right">Rp. {{ $toCurrency(400000, 0, 0) || '-' }}</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -79,27 +90,33 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content custom-rounded-medium">
                     <div class="modal-header">
-                        <h5 class="modal-title">Tambah Kategori Barang</h5>
+                        <h5 class="modal-title">Tambah Merk Barang</h5>
                         <button type="button" class="btn btn-square bg-white border" data-bs-dismiss="modal" ref="closeModal"><i class="ri-close-line fs-4"></i></button>
                     </div>
                     <div class="modal-body">
                         <Form :validation-schema="schema" @submit="handleSubmit" ref="form">
                             <h6 class="mb-3">Silahkan lengkapi form dibawah ini dengan benar.</h6>
                             <div class="form-group mb-3">
-                                <label class="form-label">Nama <span class="text-danger">*</span></label>
-                                <Field type="text" name="name" class="form-control custom-rounded-medium mb-2" placeholder="Masukkan nama merk barang" v-model="form.name"/>
+                                <label class="form-label">Item <span class="text-danger">*</span></label>
+                                <Field type="text" name="name" class="form-control custom-rounded-medium mb-2" placeholder="Masukkan nama item" v-model="form.name"/>
                                 <ErrorMessage name="name" :class="'text-danger'" />
                             </div>
-                            <div class="form-group row">
-                                <div class="col-md-6 py-3 border-bottom mb-3">
-                                    <label class="form-label">Min Profit <span class="text-danger">*</span></label>
-                                    <Field type="number" name="purchase_price_low" class="form-control custom-rounded-medium mb-2" placeholder="Masukan minimal profit"/>
-                                    <ErrorMessage name="name" :class="'text-danger'" />
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Quantity <span class="text-danger">*</span></label>
+                                    <Field type="number" name="quantity" class="form-control custom-rounded-medium mb-2" placeholder="Masukkan jumlah item" v-model="form.quantity"/>
+                                    <ErrorMessage name="quantity" :class="'text-danger'" />
                                 </div>
-                                <div class="col-md-6 py-3 border-start border-bottom mb-3">
-                                    <label class="form-label">Max Profit <span class="text-danger">*</span></label>
-                                    <Field type="number" name="purchase_price_high" class="form-control custom-rounded-medium mb-2" placeholder="Masukan maksimal profit"/>
-                                    <ErrorMessage name="name" :class="'text-danger'" />
+                                <div class="col-md-6">
+                                    <label class="form-label">Kewajiban <span class="text-danger">*</span></label>
+                                    <Field type="text" name="amount" v-money-mask class="form-control custom-rounded-medium mb-2" placeholder="Rp. xxx.xxx"/>
+                                    <ErrorMessage name="amount" :class="'text-danger'" />
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Total</label>
+                                <div class="alert alert-primary custom-rounded-medium mb-0">
+                                    <div class="fs-3 fw-bold">Rp. 300.000</div>
                                 </div>
                             </div>
                             <div class="spacer-medium"></div>
@@ -128,16 +145,16 @@ export default {
     data() {
         return {
             list: [
-                { id: 1, name: 'Kampas Rem', created_at: '2024-06-01 08:15:23' },
-                { id: 2, name: 'Busi', created_at: '2024-06-02 09:22:10' },
-                { id: 3, name: 'Oli Mesin', created_at: '2024-06-03 10:05:45' },
-                { id: 4, name: 'Aki', created_at: '2024-06-04 11:30:12' },
-                { id: 5, name: 'Lampu', created_at: '2024-06-05 12:47:55' },
-                { id: 6, name: 'Filter Udara', created_at: '2024-06-06 13:18:33' },
-                { id: 7, name: 'Rantai', created_at: '2024-06-07 14:25:40' },
-                { id: 8, name: 'Gear Set', created_at: '2024-06-08 15:40:28' },
-                { id: 9, name: 'Ban', created_at: '2024-06-09 16:55:19' },
-                { id: 10, name: 'Shockbreaker', created_at: '2024-06-10 17:12:07' },
+                { id: 1, name: 'Sewa Toko', quantity: 1, amount: 5000000, total_amount: 5000000 },
+                { id: 2, name: 'Listrik', quantity: 1, amount: 750000, total_amount: 750000 },
+                { id: 3, name: 'Gaji Karyawan', quantity: 3, amount: 2000000, total_amount: 6000000 },
+                { id: 4, name: 'Air', quantity: 1, amount: 200000, total_amount: 200000 },
+                { id: 5, name: 'Internet', quantity: 1, amount: 400000, total_amount: 400000 },
+                { id: 6, name: 'Pajak', quantity: 1, amount: 1000000, total_amount: 1000000 },
+                { id: 7, name: 'ATK', quantity: 1, amount: 150000, total_amount: 150000 },
+                { id: 8, name: 'Kebersihan', quantity: 1, amount: 250000, total_amount: 250000 },
+                { id: 9, name: 'Transportasi', quantity: 2, amount: 300000, total_amount: 600000 },
+                { id: 10, name: 'Maintenance', quantity: 1, amount: 500000, total_amount: 500000 },
             ],
             detail: {},
             isCheckAll: false,

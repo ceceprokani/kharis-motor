@@ -165,22 +165,15 @@
                                     <label class="form-label mb-0">Penjualan Barang</label>
                                 </div>
                                 <div class="row px-3">
-                                    <div class="col-md-6 py-3 border-bottom mb-3">
-                                        <label class="form-label">Min Profit <span class="text-danger">*</span></label>
-                                        <Field type="text" name="purchase_price_low" v-money-mask class="form-control custom-rounded-medium mb-2" placeholder="Rp. xxx.xxx"/>
-                                        <ErrorMessage name="name" :class="'text-danger'" />
-                                    </div>
-                                    <div class="col-md-6 py-3 border-start border-bottom mb-3">
-                                        <label class="form-label">Max Profit <span class="text-danger">*</span></label>
-                                        <Field type="text" name="purchase_price_high" v-money-mask class="form-control custom-rounded-medium mb-2" placeholder="Rp. xxx.xxx"/>
-                                        <ErrorMessage name="name" :class="'text-danger'" />
-                                    </div>
                                     <div class="col-md-6">
                                         <div class="alert alert-success p-3 custom-rounded-medium">
                                             <div class="d-flex align-items-center">
                                                 <i class="ri-creative-commons-nc-fill fs-1 me-3"></i>
-                                                <div class="d-block">
-                                                    <div>Harga Jual Bawah</div>
+                                                <div class="d-block w-100">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div>Harga Jual Bawah</div>
+                                                        <div class="badge bg-success fw-bold pb-0 fs-6">15%</div>
+                                                    </div>
                                                     <div class="fs-2 fw-bold">Rp. 2.000.000</div>
                                                 </div>
                                             </div>
@@ -190,8 +183,11 @@
                                         <div class="alert alert-success p-3 custom-rounded-medium">
                                             <div class="d-flex align-items-center">
                                                 <i class="ri-funds-fill fs-1 me-3"></i>
-                                                <div class="d-block">
-                                                    <div>Harga Jual Tinggi</div>
+                                                <div class="d-block w-100">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div>Harga Jual Tinggi</div>
+                                                        <div class="badge bg-success fw-bold pb-0 fs-6">30%</div>
+                                                    </div>
                                                     <div class="fs-2 fw-bold">Rp. 2.500.000</div>
                                                 </div>
                                             </div>

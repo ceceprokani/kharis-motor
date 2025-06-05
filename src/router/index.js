@@ -11,9 +11,10 @@ import Signin from '../views/authentication/Signin.vue'
 import Brand from '../views/master-data/brand/Index.vue'
 // Master Data Category
 import Category from '../views/master-data/category/Index.vue'
-
 // Items
 import Items from '../views/items/Index.vue'
+// Outcomes
+import Outcomes from '../views/outcomes/Index.vue'
 
 import ChangePassword from '../views/ChangePassword.vue'
 
@@ -81,6 +82,16 @@ const routes = [
         component: Items,
         meta: {
             title: `${nameApplication} | Data Barang`,
+            footer: true,
+            navbar: true,
+        }
+    },
+    {
+        path: '/outcomes',
+        name: 'outcomes',
+        component: Outcomes,
+        meta: {
+            title: `${nameApplication} | Kewajiban`,
             footer: true,
             navbar: true,
         }

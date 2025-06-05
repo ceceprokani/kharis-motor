@@ -83,12 +83,12 @@
     border-bottom-right-radius: var(--radius-medium) !important;
 }
 
-.custom-rounded {
-    border-radius: var(--radius-extra-large) !important;
-    -webkit-border-radius: var(--radius-extra-large) !important;
-    -moz-border-radius: var(--radius-extra-large) !important;
-    -ms-border-radius: var(--radius-extra-large) !important;
-    -o-border-radius: var(--radius-extra-large) !important;
+.custom-rounded-medium-bottom-left {
+    border-bottom-left-radius: var(--radius-medium) !important;
+}
+
+.custom-rounded-medium-bottom-right {
+    border-bottom-right-radius: var(--radius-medium) !important;
 }
 
 .button-rounded {
