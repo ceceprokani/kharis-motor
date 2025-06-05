@@ -167,12 +167,12 @@
                                 <div class="row px-3">
                                     <div class="col-md-6 py-3 border-bottom mb-3">
                                         <label class="form-label">Min Profit <span class="text-danger">*</span></label>
-                                        <Field type="text" name="purchase_price_low" v-money-mask class="form-control custom-rounded-medium" placeholder="Rp. xxx.xxx"/>
+                                        <Field type="text" name="purchase_price_low" v-money-mask class="form-control custom-rounded-medium mb-2" placeholder="Rp. xxx.xxx"/>
                                         <ErrorMessage name="name" :class="'text-danger'" />
                                     </div>
                                     <div class="col-md-6 py-3 border-start border-bottom mb-3">
                                         <label class="form-label">Max Profit <span class="text-danger">*</span></label>
-                                        <Field type="text" name="purchase_price_high" v-money-mask class="form-control custom-rounded-medium" placeholder="Rp. xxx.xxx"/>
+                                        <Field type="text" name="purchase_price_high" v-money-mask class="form-control custom-rounded-medium mb-2" placeholder="Rp. xxx.xxx"/>
                                         <ErrorMessage name="name" :class="'text-danger'" />
                                     </div>
                                     <div class="col-md-6">
